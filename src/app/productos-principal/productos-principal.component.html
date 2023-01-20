@@ -1,9 +1,40 @@
-<h1>
-    Lista de productos
-</h1>
 
-<h2> Y todas las funciones de los productos</h2>
-<h3> Agregar un nuevo producto</h3>
-<h3> Eliminar un producto </h3>
-<h4> Cambiar los precios de los productos </h4>
-<h5> Aumentar un porcentaje sciertos productos </h5>
+<!-- 
+<div class="container-fluid"> 
+    <p> <button (click) = "verLosProductos()">Ver lista de productos </button> </p>
+    <label *ngIf = "verListaProductos">
+       <table class="table table-dark">
+           <thead>
+           <tr>
+               <td> Numero de Producto </td>
+               <td> Nombre </td> 
+               <td> Precio</td>
+           </tr>
+           </thead>
+           <tbody>          
+            <tr class="table-active" *ngFor="let producto of productos">           
+                <th scope="row"> {{producto.numeroProducto}} </th>
+                <td colspan="2" class="table-active">  {{producto.nombre}} </td>
+                <td> $ {{producto.precio}} </td>
+            </tr>
+           </tbody>
+         </table>
+
+    </label>
+</div>
+-->
+
+
+ 
+  <div class = "recuadro_principal container-fluid">
+    <form [formGroup] = "agregarProducto" (submit) = "enviarProducto()">
+       <h1> Agregar Producto A la Bases de Datos</h1>    
+       <span class="badge bg-warning text-dark" *ngIf="agregarProducto.invalid"> Todos los campos son obligatorios </span>
+        <p>Numero de producto: <input type="number" placeholder="numero del producto" formControlName="numeroProducto" /></p>
+        <p>Nombre: <input type="text" placeholder="nombre del producto" formControlName = "nombre" /></p>
+        <p>Precio: <input type="number" placeholder="precio del producto" formControlName = "precio" /></p>
+        <p><input type="submit" value="Enviar Producto" [disabled] = "agregarProducto.invalid"/></p>            
+    </form>
+</div>
+
+
