@@ -62,6 +62,10 @@ export class ProductosPrincipalComponent implements OnInit {
         precio: '',
       });
     }
+
+    getProductos(){
+      this.productoSService
+    }
   
 
 

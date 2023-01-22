@@ -1,7 +1,7 @@
 export class Producto {
     id: number;
-    numeroProducto: number;
     nombre: string;
+    numeroProducto: number;
     precio: number;    
 //    cobrado: boolean;
 
