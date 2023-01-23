@@ -12,6 +12,7 @@ import { ProductoService } from '../services/producto.service';
 })
 export class ProductosPrincipalComponent implements OnInit {
 
+  
   agregarProducto: FormGroup;
   verListaProductos: boolean;
   productos: Producto[];
