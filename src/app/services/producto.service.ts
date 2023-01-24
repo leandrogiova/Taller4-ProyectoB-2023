@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Producto } from 'src/models/Producto';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
-  http: any;
 
-  constructor() { }
+  constructor(private http: HttpClient) { 
+
+  }
 
 
   public postProducto(producto: Producto): void{
