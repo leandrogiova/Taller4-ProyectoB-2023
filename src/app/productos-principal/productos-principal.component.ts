@@ -18,7 +18,7 @@ export class ProductosPrincipalComponent implements OnInit {
   productos: Producto[];
 
 
-  constructor(private fb: FormBuilder, private productoSService: ProductoService) { 
+  constructor(private fb: FormBuilder, private productoService: ProductoService) { 
     this.productos = []; //estoy inicializando la lista a vacia
     
     this.agregarProducto = this.fb.group({
@@ -35,26 +35,24 @@ export class ProductosPrincipalComponent implements OnInit {
   }
 
 
-/*
+
   VerListaProducto(): void{
     this.verListaProductos = !this.verListaProductos;
     this.productoService.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
+    console.log("Objeto traido del backeEnd: ",this.productos);
   }
-*/
 
 
 
 
-    /*
+  /*
      * FUNCION enviarProducto
      * Agrega un producto a la bases de datos.
   */
- 
-  
     enviarProducto():void{
-      this.productoSService.postProducto(this.agregarProducto.value);
+      this.productoService.postProducto(this.agregarProducto.value);
       console.log("Agregando el objeto",this.agregarProducto.value, "\nObjeto Agregado a la base de datos");
   
       this.agregarProducto = this.fb.group({
@@ -64,10 +62,10 @@ export class ProductosPrincipalComponent implements OnInit {
       });
     }
 
-    getProductos(){
-      this.productoSService
+
+    cambio(){
+      //cambia el color
     }
-  
 
 
 }

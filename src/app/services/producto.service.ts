@@ -22,5 +22,12 @@ export class ProductoService {
     //hay que modificar la bases de datos
   }
 
+
+
+  public getAllProductos(): Observable<Producto[]> {
+    return  this.http.get<Producto[]>('http://localhost:8080/productos/lista');
+  }
+
+
 }
 
