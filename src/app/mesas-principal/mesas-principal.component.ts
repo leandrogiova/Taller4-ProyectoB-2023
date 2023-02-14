@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Mesa } from '../models/Mesa';
 import { Producto } from '../models/Producto';
+import { MesaServiceService } from '../services/mesa-service.service';
 import { ProductoService } from '../services/productos-service.service';
 
 @Component({
@@ -21,6 +22,8 @@ export class MesasPrincipalComponent implements OnInit {
 
   verForm: boolean;
   verOcultar: string;
+
+
 
 
 
@@ -71,7 +74,7 @@ export class MesasPrincipalComponent implements OnInit {
       this.productos = productos;
     });
 /*
-    this.mesaProductoService.getMesasAbiertas().subscribe(mesaAbiertas => {
+    this.mesaService.getMesasAbiertas().subscribe(mesaAbiertas => {
       this.mesas = mesaAbiertas;
     });
 */
@@ -160,13 +163,19 @@ eliminarProductoDeLista($event: any){
     for(let e in this.lista){
       mesa.precio_total = mesa.precio_total + mesa.listaProductos[e].precio;
     }
+
+
+    
     this.mesas.push(mesa);
 //    this.mesaProductoService.postAbrirMesa(mesa);
 //    this.lista = [];
 
-//    this.mesaProductoService.getMesasAbiertas().subscribe(mesaAbiertas => {
+
+//    this.mesaService.getMesasAbiertas().subscribe(mesaAbiertas => {
 //      this.mesas = mesaAbiertas;
 //    });
+
+
 
     this.agregarMesaNueva =  this.fb.group({
       numeroMesa: new FormControl('', [Validators.required, Validators.min(0)]),
