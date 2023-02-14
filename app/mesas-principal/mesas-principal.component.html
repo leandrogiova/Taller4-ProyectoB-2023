@@ -1,0 +1,106 @@
+
+<div class="container-fluid">
+    <nav>
+        <p>
+            <a href="#ir_verMesas"><input  class = "boton1 resaltador" type = "button" value = "VerMesas"> </a>
+            <a href="#ir_agregarMesa"><input  class = "boton1 resaltador" type = "button" value = "AgregarMesa"> </a>
+            <a href="#ir_cobrar"><input  class = "boton1 resaltador" type = "button" value = "Ver - Cobrar"></a>
+            <a href="#ir_agregarProducto"> <input class = "boton1 resaltador" type = "button" value = "agregarProducto"> </a>
+            <a href="#ir_modificarMesa"><input  class = "boton1 resaltador" type = "button" value = "modificarMesa"></a>
+        </p>
+    </nav>    
+</div>
+
+
+
+
+<!-- 
+<div class = "recuadro_principal container-fluid">
+    <form [formGroup] = "agregarMesaNueva" (submit) = "enviarNuevaMesa()">
+       <h1> Agregar Producto A la Bases de Datos</h1>    
+       <span class="badge bg-warning text-dark" *ngIf="agregarMesaNueva.invalid"> Todos los campos son obligatorios </span>
+        <p>Numero de mesa: <input type="number" placeholder="numero del producto" formControlName="numeroProducto" /></p>
+        <p>Detalle: <input type="text" placeholder="nombre del producto" formControlName = "nombre" /></p>
+        <p><input type="submit" value="Enviar Producto" [disabled] = "agregarMesaNueva.invalid"/></p>            
+    </form>
+</div>
+-->
+
+
+
+
+
+<!-- 
+<h1>
+    SEGUNDO INGRESAR MESA
+</h1>
+<h2 id = "ir_agregarMesa"> Agregar Una nueva Mesa </h2>
+<div class="container-fluid recuadro_principal">
+    <h4>Mesa:</h4>
+    <p>Numero de mesa: <input type="number" [formControl] = "numeroMesa" placeholder="Numero de la mesa" class="form-inline"> </p>   
+        <p class = "small "> NO SE PUEDE INGRESAR UN NUMERO DE MESA QUE YA EXISTA</p>
+        <p>Fecha de la mesa <input type = "datetime-local" [formControl] = "fecha1Mesa" placeholder="Fecha de la mesa" ></p>    
+        <h4> Productos: </h4>
+        <select [formControl] = "numeroDeProducto" class = "small container-fluid" >
+            <option *ngFor = "let producto of productos" value={{producto.numeroProducto}}> 
+                {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
+            </option>
+        </select>
+    <input type = "button" value = "Agregar Producto" (click) = "listaProductos = AgregarProductoaLaListaDeProductos(listaProductos)">
+    <div class="recuadro_secundario">
+        <h6> Lista de Productos:</h6>
+        <label *ngFor=" let producto of listaProductos">
+            <ul>
+                <li>
+                    <p>
+                        <button value="{{producto.id}}" (click)="listaProductos = eliminarProductoListaProducto(listaProductos, $event)"> Eliminar </button>
+                        Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}     
+                    </p>
+                </li>
+            </ul>
+        </label>
+    </div>
+    <p>
+        <input type="text" class = "casilleroDetalle" placeholder="Detalle de la mesa" [formControl] = "detalleMesa">
+    </p>
+    <p> <input type = "button" value = "Enviar" (click) = "enviarAlServidorNuevaMesa()"> </p>
+</div>
+-->
+
+
+
+
+
+
+
+<div class = "recuadro_principal container">
+    <h1>Abrir una nueva mesa </h1>
+    <p> <button (click) = "VerOcutarFormulario()"  class="btn btn-dark"> Ver/Ocultar </button> </p>
+    <div *ngIf="verForm">
+        <form [formGroup] = "agregarMesaNueva">
+            <p>Numero de mesa: <input type="number" formControlName = "numeroMesa" placeholder="Numero de la mesa" > </p>
+            <!-- <p class = "error" *ngIf="agregarMesaNueva.controls.numeroMesa.errors && agregarMesaNueva.controls.numeroMesa.touched"> Ingrese un numero de mesa mayor o igual a cero. Y asegurese que la mesa no esté abierta </p> -->
+            <div class="small"> Las mesas abiertas son: ( <label *ngFor="let mesa of mesas, let i = index"> {{mesa.numero_mesa}} | </label> ) </div>
+            <p>Fecha de la mesa <input type = "datetime-local" formControlName = "fecha1Mesa"> </p>
+            <!-- <p class = "error" *ngIf="agregarMesaNueva.controls.fecha1Mesa.errors && agregarMesaNueva.controls.fecha1Mesa.touched"> Este campo es obligatorio por favor complete la fecha </p> -->
+            <p> <label> Productos </label> </p>
+            <select formControlName = "productoId" class = "small container-fluid" >
+                    <option *ngFor = "let producto of productos" value={{producto.id}}> 
+                        {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
+                    </option> 
+            </select>
+        </form>
+        <button (click)="AgregarProductoALista()"  class="btn btn-dark btn-sm">Agregar Producto </button>
+        <!--<button (click)="AgregarProductoALista()" [disabled]="!abrirMesaForm.controls.productoId.touched">Agregar Producto </button> --> 
+        <div class="recuadro_secundario small">
+            <h5>Lista De Productos: </h5>
+            <ul *ngFor="let producto of lista">
+                <li> 
+                    {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}} 
+                    <button value="{{producto.id}}" (click) = "eliminarProductoDeLista($event)"  class="btn btn-dark btn-sm"> Eliminar Producto </button>
+                </li>
+            </ul>
+        </div>
+        <p> <input type = "button" (click)="abrirNuevaMesa()" value = "Agregar Mesa Nueva" [disabled]="!agregarMesaNueva.valid"  class="btn btn-dark"> </p>
+    </div>
+</div>
