@@ -22,6 +22,7 @@ export class MesasPrincipalComponent implements OnInit {
 
   verForm: boolean;
   verOcultar: string;
+  mesaService: any;
 
 
 
@@ -35,7 +36,7 @@ export class MesasPrincipalComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private servicioProducto: ProductoService) { 
+  constructor(private fb: FormBuilder, private servicioProducto: ProductoService, private mesa: MesaServiceService ) { 
     this.numeroMesa = new FormControl();
     this.fecha1Mesa = new FormControl();
 
@@ -73,11 +74,19 @@ export class MesasPrincipalComponent implements OnInit {
     this.servicioProducto.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
-/*
-    this.mesaService.getMesasAbiertas().subscribe(mesaAbiertas => {
+
+    this.mesaService.getMesasAbiertas().subscribe((mesaAbiertas: Mesa[]) => {
       this.mesas = mesaAbiertas;
     });
-*/
+
+
+
+
+
+    console.log("Lista De Mesas: ", this.mesas);
+
+
+
   }
 
 
@@ -152,22 +161,23 @@ eliminarProductoDeLista($event: any){
     * Por ultimo limpio el formulario "abrirMesaForm"
   */
   abrirNuevaMesa(){
-    let mesa: Mesa = new Mesa();
-//    mesa.numero_mesa = this.agregarMesaNueva.controls.numeroMesa.value;
-    mesa.estado = true;
-//    mesa.fecha = this.agregarMesaNueva.controls.fecha1Mesa.value;
-    mesa.precio_temporal = 0;
-    mesa.productosCobrados = [];
-    mesa.listaProductos = this.lista;
-    mesa.precio_total = 0;
+    let mesa_: Mesa = new Mesa();
+    mesa_.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
+    mesa_.estado = true;
+    mesa_.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
+    mesa_.precio_temporal = 0;
+    mesa_.productosCobrados = [];
+    mesa_.listaProductos = this.lista;
+    mesa_.precio_total = 0;
     for(let e in this.lista){
-      mesa.precio_total = mesa.precio_total + mesa.listaProductos[e].precio;
+      mesa_.precio_total = mesa_.precio_total + mesa_.listaProductos[e].precio;
     }
 
 
     
-    this.mesas.push(mesa);
-//    this.mesaProductoService.postAbrirMesa(mesa);
+    this.mesas.push(mesa_);
+    console.log("Enviando mesa:", mesa_);
+    this.mesaService.postAbrirMesa(mesa_);
 //    this.lista = [];
 
 
