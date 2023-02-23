@@ -8,7 +8,7 @@ export class Mesa{
     fecha!: Date;
     precio_temporal!: number;
     precio_total!: number;
-    formaDePago!: string;
+    forma_pago!: string;
     detalle!: string;
 
     listaProductos!: Producto[];

@@ -54,9 +54,10 @@ export class MesasPrincipalComponent implements OnInit {
     this.agregarMesaNueva =  this.fb.group({
       //      numeroMesa: new FormControl('', [Validators.required, Validators.min(0), numeroDeMesaValidator.mesaExistenteConParametro(this.mesas) ] ),
       //      fecha1Mesa: new FormControl('', [Validators.required]),
-      numeroMesa: new FormControl(),
-      fecha1Mesa: new FormControl(),
-      productoId: new FormControl()
+      numeroMesa: new FormControl('', [Validators.required]),
+      fecha1Mesa: new FormControl('', [Validators.required]),
+      productoId: new FormControl(),
+      detalleMesa: new FormControl()
     });
   }
 
@@ -157,14 +158,20 @@ eliminarProductoDeLista($event: any){
     * Por ultimo limpio el formulario "abrirMesaForm"
   */
   abrirNuevaMesa(){
-     this.mesa1 = new Mesa();
-     this.mesa1.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
-     this.mesa1.estado = true;
-     this.mesa1.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
-     this.mesa1.precio_temporal = 0;
-     this.mesa1.precio_total = 0;
+    this.mesa1 = new Mesa();
+    this.mesa1.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
+    this.mesa1.estado = true;
+    this.mesa1.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
+//  console.log("1- Viendo la mesa: " + this.mesa1 + "\n\nviendo this.agregarMesaNueva" + this.agregarMesaNueva  );
+    this.mesa1.detalle = this.agregarMesaNueva.controls['detalleMesa'].value;
 
+    this.mesa1.precio_temporal = 0;
+    this.mesa1.precio_total = 0;
+    for(let i = 0; i < this.lista.length; i++){
+      this.mesa1.precio_total = this.mesa1.precio_total + this.lista[i].precio;
+    }
     this.mesa1.listaProductos = this.lista;
+    
     console.log("Enviando mesa1: ", this.mesa1);
     this.mesaService.postNuevaMesa(this.mesa1);
     

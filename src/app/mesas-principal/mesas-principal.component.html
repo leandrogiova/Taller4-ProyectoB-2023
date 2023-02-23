@@ -85,26 +85,33 @@
             <!-- <p class = "error" *ngIf="agregarMesaNueva.controls.fecha1Mesa.errors && agregarMesaNueva.controls.fecha1Mesa.touched"> Este campo es obligatorio por favor complete la fecha </p> -->
             <p> <label> Productos </label> </p>
             <select formControlName = "productoId" class = "small container-fluid" >
-                    <option *ngFor = "let producto of productos" value={{producto.id}}> 
+                    <option *ngFor = "let producto of productos" value={{producto.id}} placeholder="Seleccione un producto"> 
                         {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
                     </option> 
             </select>
+        
+            <button (click)="AgregarProductoALista()"  class="btn btn-dark btn-sm">Agregar Producto </button>
+            <!--<button (click)="AgregarProductoALista()" [disabled]="!abrirMesaForm.controls.productoId.touched">Agregar Producto </button> --> 
+            <div class="recuadro_secundario small">
+                <h5>Lista De Productos: </h5>
+                <ul *ngFor="let producto of lista">
+                    <li> 
+                        {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}} 
+                        <button value="{{producto.id}}" (click) = "eliminarProductoDeLista($event)"  class="btn btn-dark btn-sm"> Eliminar Producto </button>
+                    </li>
+                </ul>
+            </div>
+            <p>
+                <input type="text" class = "input-group input-group-lg" placeholder="Detalle de la mesa" formControlName = "detalleMesa">
+            </p>
         </form>
-        <button (click)="AgregarProductoALista()"  class="btn btn-dark btn-sm">Agregar Producto </button>
-        <!--<button (click)="AgregarProductoALista()" [disabled]="!abrirMesaForm.controls.productoId.touched">Agregar Producto </button> --> 
-        <div class="recuadro_secundario small">
-            <h5>Lista De Productos: </h5>
-            <ul *ngFor="let producto of lista">
-                <li> 
-                    {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}} 
-                    <button value="{{producto.id}}" (click) = "eliminarProductoDeLista($event)"  class="btn btn-dark btn-sm"> Eliminar Producto </button>
-                </li>
-            </ul>
-        </div>
-        <p> <input type = "button" (click)="abrirNuevaMesa()" value = "Agregar Mesa Nueva" [disabled]="!agregarMesaNueva.valid"  class="btn btn-dark"> </p>
+            <p> <input type = "button" (click)="abrirNuevaMesa()" value = "Agregar Mesa Nueva" [disabled]="!agregarMesaNueva.valid"  class="btn btn-dark"> </p>
     </div>
 </div>
 
 
 
 <button class=" btn btn-dark btn-lg" (click)="vermesass()"> VER MESAS </button>
+
+
+
