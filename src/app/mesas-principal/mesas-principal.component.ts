@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Mesa } from '../models/Mesa';
 import { Producto } from '../models/Producto';
-import { MesaServiceService } from '../services/mesa-service.service';
+import { MesaService } from '../services/mesa.service';
 import { ProductoService } from '../services/productos-service.service';
 
 @Component({
@@ -18,11 +18,10 @@ export class MesasPrincipalComponent implements OnInit {
   mesas: Mesa[];
   productos: Producto[];
   lista: Producto[];
-
+  mesa1: Mesa;
 
   verForm: boolean;
   verOcultar: string;
-  mesaService: any;
 
 
 
@@ -36,13 +35,16 @@ export class MesasPrincipalComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private servicioProducto: ProductoService, private mesa: MesaServiceService ) { 
+
+  constructor(private fb: FormBuilder, private servicioProducto: ProductoService, private mesaService: MesaService ) { 
     this.numeroMesa = new FormControl();
     this.fecha1Mesa = new FormControl();
 
-    this.mesas = new Array;
-    this.productos = new Array;
-    this.lista = new Array;
+    this.mesas = new Array();
+    this.productos = new Array();
+    this.lista = new Array();
+    this.mesa1 = new Mesa();
+
 
     this.verForm = false;
     this.verOcultar = "Ver";
@@ -74,16 +76,9 @@ export class MesasPrincipalComponent implements OnInit {
     this.servicioProducto.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
-
-    this.mesaService.getMesasAbiertas().subscribe((mesaAbiertas: Mesa[]) => {
-      this.mesas = mesaAbiertas;
+    this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
+      this.mesas = mesas;
     });
-
-
-
-
-
-    console.log("Lista De Mesas: ", this.mesas);
 
 
 
@@ -140,6 +135,7 @@ AgregarProductoALista(){
 eliminarProductoDeLista($event: any){
   for(let i: number = 0; i <= this.lista.length; i++){
     if($event.target.value == this.lista[i].id){
+
       this.lista.splice(i, 1);
       break;
     }
@@ -161,44 +157,80 @@ eliminarProductoDeLista($event: any){
     * Por ultimo limpio el formulario "abrirMesaForm"
   */
   abrirNuevaMesa(){
+     this.mesa1 = new Mesa();
+     this.mesa1.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
+     this.mesa1.estado = true;
+     this.mesa1.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
+     this.mesa1.precio_temporal = 0;
+     this.mesa1.precio_total = 0;
+
+    this.mesa1.listaProductos = this.lista;
+    console.log("Enviando mesa1: ", this.mesa1);
+    this.mesaService.postNuevaMesa(this.mesa1);
+    
+
+    this.mesa1 = new Mesa;
+    this.lista = [];
+    this.agregarMesaNueva =  this.fb.group({
+      numeroMesa: new FormControl('', [Validators.required, Validators.min(0)]),
+      fecha1Mesa: new FormControl('', [Validators.required]),
+      productoId: new FormControl('', [])
+    });
+
+
+
+
+
+/*     
     let mesa_: Mesa = new Mesa();
     mesa_.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
     mesa_.estado = true;
     mesa_.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
     mesa_.precio_temporal = 0;
-    mesa_.productosCobrados = [];
-    mesa_.listaProductos = this.lista;
-    mesa_.precio_total = 0;
+//    mesa_.precio_total = 0;
     for(let e in this.lista){
       mesa_.precio_total = mesa_.precio_total + mesa_.listaProductos[e].precio;
     }
+    mesa_.listaProductos = this.lista;
+    console.log("mesa_  ", mesa_);
 
-
-    
+   
+    //   mesa_.productosCobrados = [];
+//    mesa_.listaProductos = this.lista; 
+    mesa_.precio_total = 0;
+    mesa_.formaDePago = "Efectivo";
+//    for(let e in this.lista){
+//        mesa_.precio_total = mesa_.precio_total + mesa_.listaProductos[e].precio;
+//    }
+    mesa_.listaProductos = this.lista;
     this.mesas.push(mesa_);
-    console.log("Enviando mesa:", mesa_);
-    this.mesaService.postAbrirMesa(mesa_);
-//    this.lista = [];
-
-
-//    this.mesaService.getMesasAbiertas().subscribe(mesaAbiertas => {
-//      this.mesas = mesaAbiertas;
-//    });
-
-
+    this.mesaService.postNuevaMesa(mesa_);
+    this.lista = [];
 
     this.agregarMesaNueva =  this.fb.group({
       numeroMesa: new FormControl('', [Validators.required, Validators.min(0)]),
       fecha1Mesa: new FormControl('', [Validators.required]),
       productoId: new FormControl('', [])
     });
+*/
   }
 
 
 
 
 
+  vermesass(){
+    this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
+      this.mesas = mesas;
+    });
 
+    console.log("\n mesas: ", this.mesas, "\nProductos: ", this.productos);
+
+
+
+
+
+  }
 
 
 

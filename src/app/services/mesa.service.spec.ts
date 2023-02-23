@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MesaServiceService } from './mesa-service.service';
+import { MesaService } from './mesa.service';
 
-describe('MesaServiceService', () => {
-  let service: MesaServiceService;
+describe('MesaService', () => {
+  let service: MesaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MesaServiceService);
+    service = TestBed.inject(MesaService);
   });
 
   it('should be created', () => {
