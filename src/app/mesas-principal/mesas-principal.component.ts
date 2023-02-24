@@ -237,15 +237,69 @@ eliminarProductoDeLista($event: any){
   }
 
 
+/*
+  * FUNCION verUnaMesa
+  * Muestra el detalle de una mesa especificada
+  * Actualiza la variable mesa1 con los datos de esta mesa
+  * La variable "verUnaMesaBool" activa la visualización
+  * No recibe parametros
+  * No tiene retorno
+*/
   verUnaMesa(){
-    this.verUnaMesaBool = true;
+    this.verUnaMesaBool = !this.verUnaMesaBool;
+    this.lista = [];
+    for(let i = 0; i < this.mesas.length; i++) {
+      if(this.numeroMesa.value == this.mesas[i].numero_mesa){
+        this.mesa1 = this.mesas[i];
+        break;
+      }
+    }
   }
 
 
+
+  /*
+  * FUNCION cobrarProducto
+  * Agrega un producto a la lista de productos cobrados
+  * Reutiliza la variable "lista" y elimina ese productos de la lista de productos de la mesa
+  * Recorre la lista de productos de la mesa seleccionada anteriormente para encontrar el producto específico
+  * Reajusta el precio temporal de la mesa
+  * Recibe como parametro el id del producto
+  * No tiene retorno
+  */
   cobrarProducto($event: any){
+    for(let i: number = 0; i < this.mesa1.listaProductos.length; i++){
+      if(this.mesa1.listaProductos[i].id == $event.target.value){
+        this.mesa1.precio_temporal = this.mesa1.precio_temporal + this.mesa1.listaProductos[i].precio;
+        console.log("producto a ingreasar a la lista: ",this.mesa1.listaProductos[i]);
+        this.lista.push(this.mesa1.listaProductos[i]);
+        this.mesa1.listaProductos.splice(i,1);
+        break;
+      }
+    }
   }
 
+  
+
+  /*
+  * FUNCION deshacerCambioCobrarProducto
+  * Elimina un producto a la lista de productos cobrados
+  * Reutiliza la variable "lista" y elimina ese productos de la variable "lista" de productos cobrados
+  * Recorre la lista de productos cobrados para encontrar el producto específico
+  * Agrega el producto a la lista de productos de la mesa
+  * Reajusta el precio temporal de la mesa
+  * Recibe como parametro el id del producto
+  * No tiene retorno
+  */
   deshacerCambioCobrarProducto($event: any){
+    for(let i: number = 0; i < this.lista.length; i++){
+      if(this.lista[i].id == $event.target.value){
+        this.mesa1.precio_temporal = this.mesa1.precio_temporal - this.lista[i].precio;
+        this.mesa1.listaProductos.push(this.lista[i]);
+        this.lista.splice(i,1);
+        break;
+      }
+    }
   }
 
 
