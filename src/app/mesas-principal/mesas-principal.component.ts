@@ -26,7 +26,10 @@ export class MesasPrincipalComponent implements OnInit {
 
 
 
-
+//////////////////////////////////////////
+//variables para COBRAR UNA MESA
+//////////////////////////////////////////
+  verUnaMesaBool: boolean;
 
 
 
@@ -48,7 +51,7 @@ export class MesasPrincipalComponent implements OnInit {
 
     this.verForm = false;
     this.verOcultar = "Ver";
-
+    this.verUnaMesaBool = false;
 
 
     this.agregarMesaNueva =  this.fb.group({
@@ -175,7 +178,7 @@ eliminarProductoDeLista($event: any){
     console.log("Enviando mesa1: ", this.mesa1);
     this.mesaService.postNuevaMesa(this.mesa1);
     
-
+    this.mesas.push(this.mesa1);
     this.mesa1 = new Mesa;
     this.lista = [];
     this.agregarMesaNueva =  this.fb.group({
@@ -230,18 +233,24 @@ eliminarProductoDeLista($event: any){
     this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
       this.mesas = mesas;
     });
-
     console.log("\n mesas: ", this.mesas, "\nProductos: ", this.productos);
-
-
-
-
-
   }
 
 
+  verUnaMesa(){
+    this.verUnaMesaBool = true;
+  }
 
 
+  cobrarProducto($event: any){
+  }
+
+  deshacerCambioCobrarProducto($event: any){
+  }
+
+
+  actualizarMesaModificada(){
+  }
 
 
 
