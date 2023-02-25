@@ -25,6 +25,10 @@ export class MesaService {
     //hay que modificar la bases de datos
   }
 
+  public postActualizar(mesa: Mesa): void{
+    this.http.post('http://localhost:8080/mesasAbiertas/updateMesa', mesa).subscribe();
+  }
+
 }
 
 

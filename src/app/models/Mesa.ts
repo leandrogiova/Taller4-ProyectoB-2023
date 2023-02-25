@@ -12,6 +12,7 @@ export class Mesa{
     detalle!: string;
 
     listaProductos!: Producto[];
+    listaProductosCobrados!: Producto[];
 /*
     constructor() {
         this.id = 0;
