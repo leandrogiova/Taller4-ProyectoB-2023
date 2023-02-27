@@ -169,7 +169,6 @@ eliminarProductoDeLista($event: any){
     this.mesa1.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
     this.mesa1.detalle = this.agregarMesaNueva.controls['detalleMesa'].value;
     this.mesa1.forma_pago = "Efectivo";
-
     this.mesa1.precio_temporal = 0;
     this.mesa1.precio_total = 0;
     for(let i = 0; i < this.lista.length; i++){
@@ -191,54 +190,20 @@ eliminarProductoDeLista($event: any){
     });
     this.verForm = !this.verForm;
     this.verOcultar = "Ver";
-
-
-
-
-
-/*     
-    let mesa_: Mesa = new Mesa();
-    mesa_.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
-    mesa_.estado = true;
-    mesa_.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
-    mesa_.precio_temporal = 0;
-//    mesa_.precio_total = 0;
-    for(let e in this.lista){
-      mesa_.precio_total = mesa_.precio_total + mesa_.listaProductos[e].precio;
-    }
-    mesa_.listaProductos = this.lista;
-    console.log("mesa_  ", mesa_);
-
-   
-    //   mesa_.productosCobrados = [];
-//    mesa_.listaProductos = this.lista; 
-    mesa_.precio_total = 0;
-    mesa_.formaDePago = "Efectivo";
-//    for(let e in this.lista){
-//        mesa_.precio_total = mesa_.precio_total + mesa_.listaProductos[e].precio;
-//    }
-    mesa_.listaProductos = this.lista;
-    this.mesas.push(mesa_);
-    this.mesaService.postNuevaMesa(mesa_);
-    this.lista = [];
-
-    this.agregarMesaNueva =  this.fb.group({
-      numeroMesa: new FormControl('', [Validators.required, Validators.min(0)]),
-      fecha1Mesa: new FormControl('', [Validators.required]),
-      productoId: new FormControl('', [])
-    });
-*/
+    this.vermesass();
   }
-
+  
 
 
 
 
   vermesass(){
+    this.servicioProducto.getAllProductos().subscribe(productos => {
+      this.productos = productos;
+    });
     this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
       this.mesas = mesas;
     });
-    console.log("\n mesas: ", this.mesas, "\nProductos: ", this.productos);
   }
 
 
@@ -251,10 +216,6 @@ eliminarProductoDeLista($event: any){
   * No tiene retorno
 */
   verUnaMesa(){
-    this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
-      this.mesas = mesas;
-    });
-
     this.verUnaMesaBool = !this.verUnaMesaBool;
     this.lista = [];
     for(let i = 0; i < this.mesas.length; i++) {
@@ -280,7 +241,6 @@ eliminarProductoDeLista($event: any){
     for(let i: number = 0; i < this.mesa1.listaProductos.length; i++){
       if(this.mesa1.listaProductos[i].id == $event.target.value){
         this.mesa1.precio_temporal = this.mesa1.precio_temporal + this.mesa1.listaProductos[i].precio;
-        console.log("producto a ingreasar a la lista: ",this.mesa1.listaProductos[i]);
         this.lista.push(this.mesa1.listaProductos[i]);
         this.mesa1.listaProductos.splice(i,1);
         break;
@@ -288,8 +248,6 @@ eliminarProductoDeLista($event: any){
     }
     //la lista es la lista de productos cobrados
     this.mesa1.listaProductosCobrados = this.lista;
-
-    console.log("mesa a actualizar: ", this.mesa1);
     this.mesaService.postActualizar(this.mesa1);
 
   }
@@ -316,15 +274,11 @@ eliminarProductoDeLista($event: any){
       }
     }
     this.mesa1.listaProductosCobrados = this.lista;
-    console.log("---------------Mesa a enviar: ", this.mesa1);
     this.mesaService.postActualizar(this.mesa1);
   }
 
 
   actualizarMesaModificada(){
-//    let mesaEnviar: Mesa;
-//    mesaEnviar = this.mesa1;
-
     this.mesa1.estado = false;
     this.mesa1.precio_temporal = 0;
     
@@ -332,8 +286,6 @@ eliminarProductoDeLista($event: any){
     
     this.mesa1.listaProductos = this.mesa1.listaProductos.concat(this.mesa1.listaProductosCobrados);
     this.mesa1.listaProductosCobrados = [];
-
-    console.log("Mesa a cerrar: ", this.mesa1);
     this.mesaService.postActualizar(this.mesa1);
     
     for(let i = 0; i < this.mesas.length; i++) {
