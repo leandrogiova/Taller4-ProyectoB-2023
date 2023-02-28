@@ -12,24 +12,20 @@ import { ProductoService } from '../services/productos-service.service';
 })
 export class MesasPrincipalComponent implements OnInit {
 
-  agregarMesaNueva: FormGroup;
+  mesaform: FormGroup;
   numeroMesa: FormControl;
   fecha1Mesa: FormControl;
+
+
   mesas: Mesa[];
   productos: Producto[];
   lista: Producto[];
   mesa1: Mesa;
 
   verForm: boolean;
-  verOcultar: string;
-
-
-
-
-//////////////////////////////////////////
-//variables para COBRAR UNA MESA
-//////////////////////////////////////////
+  verForm2: boolean;
   verUnaMesaBool: boolean;
+  verOcultar: string;
 
 
 
@@ -43,6 +39,7 @@ export class MesasPrincipalComponent implements OnInit {
     this.numeroMesa = new FormControl();
     this.fecha1Mesa = new FormControl();
 
+
     this.mesas = new Array();
     this.productos = new Array();
     this.lista = new Array();
@@ -52,9 +49,10 @@ export class MesasPrincipalComponent implements OnInit {
     this.verForm = false;
     this.verOcultar = "Ver";
     this.verUnaMesaBool = false;
+    this.verForm2 = false;
 
 
-    this.agregarMesaNueva =  this.fb.group({
+    this.mesaform =  this.fb.group({
       //      numeroMesa: new FormControl('', [Validators.required, Validators.min(0), numeroDeMesaValidator.mesaExistenteConParametro(this.mesas) ] ),
       //      fecha1Mesa: new FormControl('', [Validators.required]),
       numeroMesa: new FormControl('', [Validators.required]),
@@ -101,14 +99,14 @@ export class MesasPrincipalComponent implements OnInit {
     * No recibe parametros
     * No retorna ningun tipo
   */
-  VerOcutarFormulario(){
+  verOcutarFormulario(){
     if(this.verForm) {
       this.verForm = false;
-      this.verOcultar = "Ocultar";
+      this.verOcultar = "Ver";
     }
     else {
       this.verForm = true;
-      this.verOcultar = "Ver";
+      this.verOcultar = "Ocultar";
     }
   }
 
@@ -122,9 +120,9 @@ export class MesasPrincipalComponent implements OnInit {
     * FUNCION AgregarProductoALista
     * agrega el producto seleccionado a una lista para luego agregar dicha lista a la nueva mesa que se va a abrir.
 */
-AgregarProductoALista(){ 
+agregarProductoALista(){ 
   for(let i: number = 0; i <= this.productos.length; i++){   
-    if(this.productos[i].id == this.agregarMesaNueva.controls['productoId'].value){
+    if(this.productos[i].id == this.mesaform.controls['productoId'].value){
       this.lista.push(this.productos[i]);
       break;
     }
@@ -164,10 +162,10 @@ eliminarProductoDeLista($event: any){
   */
   abrirNuevaMesa(){
     this.mesa1 = new Mesa();
-    this.mesa1.numero_mesa = this.agregarMesaNueva.controls['numeroMesa'].value;
+    this.mesa1.numero_mesa = this.mesaform.controls['numeroMesa'].value;
     this.mesa1.estado = true;
-    this.mesa1.fecha = this.agregarMesaNueva.controls['fecha1Mesa'].value;
-    this.mesa1.detalle = this.agregarMesaNueva.controls['detalleMesa'].value;
+    this.mesa1.fecha = this.mesaform.controls['fecha1Mesa'].value;
+    this.mesa1.detalle = this.mesaform.controls['detalleMesa'].value;
     this.mesa1.forma_pago = "Efectivo";
     this.mesa1.precio_temporal = 0;
     this.mesa1.precio_total = 0;
@@ -180,9 +178,9 @@ eliminarProductoDeLista($event: any){
     console.log("Enviando mesa1: ", this.mesa1);
     this.mesaService.postNuevaMesa(this.mesa1);
     this.mesas.push(this.mesa1);
-    this.mesa1 = new Mesa;
+
     this.lista = [];
-    this.agregarMesaNueva =  this.fb.group({
+    this.mesaform =  this.fb.group({
       numeroMesa: new FormControl('', [Validators.required]),
       fecha1Mesa: new FormControl('', [Validators.required]),
       productoId: new FormControl(),
@@ -196,7 +194,49 @@ eliminarProductoDeLista($event: any){
 
 
 
+  /*
+    * FUNCION seleccionarMesa
+    * Carga la variable "mesa1" para poder agregar mas productos a la  mesa
+    * "mesa1" sera la mesa que se envia al servidor para poder la mesa
+    * No recibe parametros.
+    * No tiene retorno.
+  */
+  seleccionarMesa(){
+    this.mesa1 = new Mesa();
+    this.lista = [];
+    for(let i = 0; i < this.mesas.length; i++) {
+      if(this.numeroMesa.value == this.mesas[i].numero_mesa){
+        this.mesa1 = this.mesas[i];
+        break;
+      }
+    }
+  }
 
+
+
+
+  /*
+    * FUNCION actualizarMesa
+    * Actualiza una mesa con mas productos 
+    * Envia al servidor la variable "mesa1"
+    * No recibe parametros.
+    * No tiene retorno.
+  */
+  actulaizarMesa(){
+    console.log("this.lista", this.lista, "this.mesa1", this.mesa1);
+  }
+
+
+
+
+
+  /*
+    * FUNCION vermesas
+    * Actualiza las variables "mesas" y "productos".
+    * Sincronizandolas con la base de datos.
+    * No recibe parametros.
+    * No tiene retorno.
+  */
   vermesass(){
     this.servicioProducto.getAllProductos().subscribe(productos => {
       this.productos = productos;
@@ -278,6 +318,16 @@ eliminarProductoDeLista($event: any){
   }
 
 
+
+  /*
+  * FUNCION actualizarMesaModificada
+  * Envia una mesa al servidor para ser guardada en la base de datos.
+  * Carga la variable "mesa1" con todos sus atributos correspondientes 
+  * La lista de produstos de productos van a estar cargadas en la variable "listaProductos"
+  * La lista "listaProductosCobrados" se igualara a vacia para lograr que la lista de productos quede en la listaProductos de la mesa 
+  * Recibe como parametro el id del producto
+  * No tiene retorno
+  */
   actualizarMesaModificada(){
     this.mesa1.estado = false;
     this.mesa1.precio_temporal = 0;
@@ -294,6 +344,7 @@ eliminarProductoDeLista($event: any){
         break;
       }
     }
+    this.lista = [];
     this.numeroMesa = new FormControl();
     this.verUnaMesaBool = !this.verUnaMesaBool;
     this.mesa1 = new Mesa();  
