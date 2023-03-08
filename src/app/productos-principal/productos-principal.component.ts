@@ -27,7 +27,6 @@ export class ProductosPrincipalComponent implements OnInit {
       nombre: '',
       precio: '',
     });
-
     this.verListaProductos = false;
   }
 
@@ -64,11 +63,4 @@ export class ProductosPrincipalComponent implements OnInit {
       });
 
     }
-
-
-    cambio(){
-      //cambia el color
-    }
-
-
 }

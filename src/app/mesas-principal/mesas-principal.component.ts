@@ -43,12 +43,10 @@ export class MesasPrincipalComponent implements OnInit {
     this.numeroMesa = new FormControl();
     this.fecha1Mesa = new FormControl();
 
-
     this.mesas = new Array();
     this.productos = new Array();
     this.lista = new Array();
     this.mesa1 = new Mesa();
-
 
     this.verForm = false;
     this.verOcultar = "Ver";
@@ -59,56 +57,20 @@ export class MesasPrincipalComponent implements OnInit {
     this.verForm3 = false;
     this.numero = 0;
 
-
     this.mesaform =  this.fb.group({
       //      numeroMesa: new FormControl('', [Validators.required, Validators.min(0), numeroDeMesaValidator.mesaExistenteConParametro(this.mesas) ] ),
-      //      fecha1Mesa: new FormControl('', [Validators.required]),
       numeroMesa: new FormControl('', [Validators.required]),
-      fecha1Mesa: new FormControl('', [Validators.required]),
       productoId: new FormControl(),
       detalleMesa: new FormControl()
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   ngOnInit(): void {
     this.vermesass();
-    /*
-    this.servicioProducto.getAllProductos().subscribe(productos => {
-    this.productos = productos;
-    });
-    this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
-      this.mesas = mesas;
-    });
-*/
-/*    
-    this.mesaform =  this.fb.group({
-      numeroMesa: new FormControl('', [Validators.required, Validators.min(0), numeroDeMesaValidator.mesaExistenteConParametro(this.mesas) ] ),
-      //      fecha1Mesa: new FormControl('', [Validators.required]),
-      //numeroMesa: new FormControl('', [Validators.required]),
-      fecha1Mesa: new FormControl('', [Validators.required]),
-      productoId: new FormControl(),
-      detalleMesa: new FormControl()
-    });
-*/
-
   }
 
 
-
-
-    /*
+  /*
     * FUNCION vermesas
     * Actualiza las variables "mesas" y "productos".
     * Sincronizandolas con la base de datos.
@@ -122,11 +84,14 @@ export class MesasPrincipalComponent implements OnInit {
       this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
         this.mesas = mesas;
       });
-      console.log("this.mesas: \n\n", this.mesas)
     }
 
 
 
+
+
+
+/* ----------------------------------------------------------------------------------------------*/
 
 
 
@@ -147,12 +112,6 @@ export class MesasPrincipalComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
 /*
     * FUNCION AgregarProductoALista
     * agrega el producto seleccionado a una lista para luego agregar dicha lista a la nueva mesa que se va a abrir.
@@ -164,9 +123,6 @@ agregarProductoALista(){
       break;
     }
   }
-  //la "lista" = listaProductosCobrados
-  //la lista de productos de la mesa son los productos sin cobrar
-//cuando se cierra la mesa completa todos los productos deben qudar en la lista de productos de la mesa
 }
 
 /*
@@ -183,12 +139,6 @@ eliminarProductoDeLista($event: any){
   }
 }
 
-
-
-
-
- 
-
   /*
     * FUNCION abrirNuevaMesa
     * Crea una nueva mesa (temporal) asignandole el estado de la mesa a true, la lista de productos agregadas anteriormente, pone los precios correspondientes
@@ -202,7 +152,6 @@ eliminarProductoDeLista($event: any){
     this.mesa1.numero_mesa = this.mesaform.controls['numeroMesa'].value;
     this.mesa1.estado = true;
 
-//    this.mesa1.fecha = this.mesaform.controls['fecha1Mesa'].value;
     this.mesa1.fecha = new Date();
     this.mesa1.detalle = this.mesaform.controls['detalleMesa'].value;
     this.mesa1.forma_pago = "Efectivo";
@@ -232,9 +181,18 @@ eliminarProductoDeLista($event: any){
   
 
 
+/* ----------------------------------------------------------------------------------------------*/
 
 
-  
+
+
+  /*
+    * VerOcultarFormulario2 muestra u oculta el furmulario para agregar nuevos productos a una mesa
+    * VerOcultarFormulario2 cambia el valor de la variable booleana verForm2 para mostrar/ocultar el formulario
+    * Ademas actualiza la variable "this.mesas"
+    * No recibe parametros
+    * No retorna ningun tipo
+  */
   verOcutarFormulario2(){
     if(this.verForm2) {
       this.verForm2 = !this.verForm2;
@@ -246,7 +204,6 @@ eliminarProductoDeLista($event: any){
       this.vermesass();
     }
   }
-
 
   /*
     * FUNCION seleccionarMesa
@@ -266,10 +223,6 @@ eliminarProductoDeLista($event: any){
     }
   }
 
-
-
-
-
   /*
     * FUNCION actualizarMesa
     * Actualiza una mesa con mas productos 
@@ -282,11 +235,9 @@ eliminarProductoDeLista($event: any){
     for(let i = 0; i < this.lista.length; i++){
       this.mesa1.precio_total = this.mesa1.precio_total + this.lista[i].precio;
     }
-
     this.mesaService.postActualizar(this.mesa1);
     this.mesaform =  this.fb.group({
       numeroMesa: new FormControl('', [Validators.required]),
-      fecha1Mesa: new FormControl('', [Validators.required]),
       productoId: new FormControl(),
       detalleMesa: new FormControl()
     });
@@ -299,45 +250,37 @@ eliminarProductoDeLista($event: any){
 
 
 
+/* ----------------------------------------------------------------------------------------------*/
 
 
 
-
+  /*
+    * VerOcultarFormulario3 muestra u oculta el furmulario para cobrar un producto o mas productos
+    * VerOcultarFormulario3 cambia el valor de la variable booleana verForm3 para mostrar/ocultar el formulario
+    * Ademas actualiza la variable "this.mesas"
+    * No recibe parametros
+    * No retorna ningun tipo
+  */
   verOcutarFormulario3(){
-
     if(this.verForm3) {
       this.verForm3 = false;
       this.verOcultar3 = "Ver";
-
     }
     else {
       this.verForm3 = true;
       this.verOcultar3 = "Ocultar";
       this.vermesass();
     }
-
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-  * FUNCION verUnaMesa
-  * Muestra el detalle de una mesa especificada
-  * Actualiza la variable mesa1 con los datos de esta mesa
-  * La variable "verUnaMesaBool" activa la visualización
-  * No recibe parametros
-  * No tiene retorno
-*/
+  /*
+    * FUNCION verUnaMesa
+    * Muestra el detalle de una mesa especificada
+    * Actualiza la variable mesa1 con los datos de esta mesa
+    * La variable "verUnaMesaBool" activa la visualización
+    * No recibe parametros
+    * No tiene retorno
+  */
   verUnaMesa(){
     this.verUnaMesaBool = !this.verUnaMesaBool;
     this.lista = [];
@@ -349,41 +292,15 @@ eliminarProductoDeLista($event: any){
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
   /*
-  * FUNCION cobrarProducto
-  * Agrega un producto a la lista de productos cobrados
-  * Reutiliza la variable "lista" y elimina ese productos de la lista de productos de la mesa
-  * Recorre la lista de productos de la mesa seleccionada anteriormente para encontrar el producto específico
-  * Reajusta el precio temporal de la mesa
-  * Recibe como parametro el id del producto
-  * No tiene retorno
-
-  cobrarProducto($event: any){
-    for(let i: number = 0; i < this.mesa1.listaProductos.length; i++){
-      if(this.mesa1.listaProductos[i].id == $event.target.value){
-        this.mesa1.precio_temporal = this.mesa1.precio_temporal + this.mesa1.listaProductos[i].precio;
-        this.lista.push(this.mesa1.listaProductos[i]);
-        this.mesa1.listaProductos.splice(i,1);
-        break;
-      }
-    }
-    //la lista es la lista de productos cobrados
-    this.mesa1.listaProductosCobrados = this.lista;
-    this.mesaService.postActualizar(this.mesa1);
-    this.mesas[this.numero] = this.mesa1;
-  }
-*/
+    * FUNCION cobrarProducto
+    * Agrega un producto a la lista de productos cobrados
+    * Reutiliza la variable "lista" y elimina ese productos de la lista de productos de la mesa
+    * Recorre la lista de productos de la mesa seleccionada anteriormente para encontrar el producto específico
+    * Reajusta el precio temporal de la mesa
+    * Recibe como parametro el id del producto
+    * No tiene retorno
+  */
   cobrarProducto($event: any){
     for(let i: number = 0; i < this.mesas[this.numero].listaProductos.length; i++){
       if(this.mesas[this.numero].listaProductos[i].id == $event.target.value){
@@ -393,12 +310,18 @@ eliminarProductoDeLista($event: any){
         break;
       }
     }
-    console.log("\n\n1---- Actulizacion de las lista de la mesa this.mesas[this.numero]: ", this.mesas[this.numero]);
-    this.mesaService.postActualizar(this.mesas[this.numero]);
   }
 
-
-
+  /*
+    * FUNCION deshacerCambioCobrarProducto
+    * Elimina un producto a la lista de productos cobrados
+    * Reutiliza la variable "lista" y elimina ese productos de la variable "lista" de productos cobrados
+    * Recorre la lista de productos cobrados para encontrar el producto específico
+    * Agrega el producto a la lista de productos de la mesa
+    * Reajusta el precio temporal de la mesa
+    * Recibe como parametro el id del producto
+    * No tiene retorno
+  */
   deshacerCambioCobrarProducto($event: any){
     for(let i: number = 0; i < this.mesas[this.numero].listaProductosCobrados.length; i++){
       if(this.mesas[this.numero].listaProductosCobrados[i].id == $event.target.value){
@@ -408,69 +331,23 @@ eliminarProductoDeLista($event: any){
         break;
       }
     }
-    console.log("\n\n2---- Actulizacion de las lista de la mesa this.mesas[this.numero]: ", this.mesas[this.numero]);
-    this.mesaService.postActualizar(this.mesas[this.numero]);
   }
 
   /*
-  * FUNCION deshacerCambioCobrarProducto
-  * Elimina un producto a la lista de productos cobrados
-  * Reutiliza la variable "lista" y elimina ese productos de la variable "lista" de productos cobrados
-  * Recorre la lista de productos cobrados para encontrar el producto específico
-  * Agrega el producto a la lista de productos de la mesa
-  * Reajusta el precio temporal de la mesa
-  * Recibe como parametro el id del producto
-  * No tiene retorno
-
-  deshacerCambioCobrarProducto($event: any){
-    for(let i: number = 0; i < this.lista.length; i++){
-      if(this.lista[i].id == $event.target.value){
-        this.mesa1.precio_temporal = this.mesa1.precio_temporal - this.lista[i].precio;
-        this.mesa1.listaProductos.push(this.lista[i]);
-        this.lista.splice(i,1);
-        break;
-      }
-    }
-    this.mesa1.listaProductosCobrados = this.lista;
-    this.mesaService.postActualizar(this.mesa1);
-  }
-  */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*
-  * FUNCION cerrarMesa
-  * Envia una mesa al servidor para ser guardada en la base de datos.
-  * Carga la variable "mesa1" con todos sus atributos correspondientes 
-  * La lista de produstos de productos van a estar cargadas en la variable "listaProductos"
-  * La lista "listaProductosCobrados" se igualara a vacia para lograr que la lista de productos quede en la listaProductos de la mesa 
-  * Recibe como parametro el id del producto
-  * No tiene retorno
+    * FUNCION cerrarMesa
+    * Envia una mesa al servidor para ser guardada en la base de datos.
+    * Carga la variable "mesa1" con todos sus atributos correspondientes 
+    * La lista de produstos de productos van a estar cargadas en la variable "listaProductos"
+    * La lista "listaProductosCobrados" se igualara a vacia para lograr que la lista de productos quede en la listaProductos de la mesa 
+    * Recibe como parametro el id del producto
+    * No tiene retorno
   */
   cerrarMesa(){
     this.mesa1.estado = false;
     this.mesa1.precio_temporal = 0;
-    
-   
     this.mesa1.listaProductos = this.mesa1.listaProductos.concat(this.mesa1.listaProductosCobrados);
     this.mesa1.listaProductosCobrados = [];
     this.mesaService.postActualizar(this.mesa1);
-    
     for(let i = 0; i < this.mesas.length; i++) {
       if(this.numeroMesa.value == this.mesas[i].numero_mesa){
         this.mesas.splice(i, 1);
@@ -484,14 +361,6 @@ eliminarProductoDeLista($event: any){
     this.verForm3 = !this.verForm3;
     this.verOcultar = "Ver";
   }
-
-
-
-
-
-
-
-
 
 
 }

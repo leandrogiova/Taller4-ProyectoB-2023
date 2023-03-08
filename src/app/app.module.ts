@@ -9,7 +9,6 @@ import { MesasPrincipalComponent } from './mesas-principal/mesas-principal.compo
 
 import { ProductosPrincipalComponent } from './productos-principal/productos-principal.component';
 
-//https://shecodes.gitbook.io/she-codes-angular/workshop-v.3/avanzado-2
 
 @NgModule({
   declarations: [

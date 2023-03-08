@@ -21,8 +21,6 @@ export class MesaService {
     console.log("Enviando al servidor...");
     console.log("\nEnviando una nueva mesa: \n", mesa);
     this.http.post('http://localhost:8080/mesasAbiertas/envio', mesa).subscribe();
-    //error en la base de datos
-    //hay que modificar la bases de datos
   }
 
   public postActualizar(mesa: Mesa): void{
