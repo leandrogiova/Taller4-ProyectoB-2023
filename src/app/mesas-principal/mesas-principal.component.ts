@@ -27,6 +27,8 @@ export class MesasPrincipalComponent implements OnInit {
   verForm3: boolean;
   verUnaMesaBool: boolean;
   verOcultar: string;
+  verOcultar2: string;
+  verOcultar3: string;
   numero: number;
 
 
@@ -50,6 +52,8 @@ export class MesasPrincipalComponent implements OnInit {
 
     this.verForm = false;
     this.verOcultar = "Ver";
+    this.verOcultar2 = "Ver";
+    this.verOcultar3 = "Ver";
     this.verUnaMesaBool = false;
     this.verForm2 = false;
     this.verForm3 = false;
@@ -197,7 +201,9 @@ eliminarProductoDeLista($event: any){
     this.mesa1 = new Mesa();
     this.mesa1.numero_mesa = this.mesaform.controls['numeroMesa'].value;
     this.mesa1.estado = true;
-    this.mesa1.fecha = this.mesaform.controls['fecha1Mesa'].value;
+
+//    this.mesa1.fecha = this.mesaform.controls['fecha1Mesa'].value;
+    this.mesa1.fecha = new Date();
     this.mesa1.detalle = this.mesaform.controls['detalleMesa'].value;
     this.mesa1.forma_pago = "Efectivo";
     this.mesa1.precio_temporal = 0;
@@ -227,15 +233,17 @@ eliminarProductoDeLista($event: any){
 
 
 
+
+  
   verOcutarFormulario2(){
-    this.vermesass();
     if(this.verForm2) {
-      this.verForm2 = !this.verForm;
-      this.verOcultar = "Ver";
+      this.verForm2 = !this.verForm2;
+      this.verOcultar2 = "Ver";
     }
     else {
-      this.verForm2 = !this.verForm;
-      this.verOcultar = "Ocultar";
+      this.verForm2 = !this.verForm2;
+      this.verOcultar2 = "Ocultar";
+      this.vermesass();
     }
   }
 
@@ -262,10 +270,6 @@ eliminarProductoDeLista($event: any){
 
 
 
-
-
-
-
   /*
     * FUNCION actualizarMesa
     * Actualiza una mesa con mas productos 
@@ -274,7 +278,20 @@ eliminarProductoDeLista($event: any){
     * No tiene retorno.
   */
   actulaizarMesa(){
-    console.log("this.lista", this.lista, "this.mesa1", this.mesa1);
+    this.mesa1.listaProductos = this.lista.concat(this.mesa1.listaProductos);
+    for(let i = 0; i < this.lista.length; i++){
+      this.mesa1.precio_total = this.mesa1.precio_total + this.lista[i].precio;
+    }
+
+    this.mesaService.postActualizar(this.mesa1);
+    this.mesaform =  this.fb.group({
+      numeroMesa: new FormControl('', [Validators.required]),
+      fecha1Mesa: new FormControl('', [Validators.required]),
+      productoId: new FormControl(),
+      detalleMesa: new FormControl()
+    });
+    this.lista = [];
+    this.mesa1 = new Mesa();
   }
 
 
@@ -290,12 +307,12 @@ eliminarProductoDeLista($event: any){
 
     if(this.verForm3) {
       this.verForm3 = false;
-      this.verOcultar = "Ver";
+      this.verOcultar3 = "Ver";
 
     }
     else {
       this.verForm3 = true;
-      this.verOcultar = "Ocultar";
+      this.verOcultar3 = "Ocultar";
       this.vermesass();
     }
 
