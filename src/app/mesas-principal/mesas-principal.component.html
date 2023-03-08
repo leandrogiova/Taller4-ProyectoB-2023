@@ -20,9 +20,7 @@
     <div *ngIf="verForm">
         <form [formGroup] = "mesaform">
             <p>Numero de mesa: <input type="number" formControlName = "numeroMesa" placeholder="Numero de la mesa" > </p>            
-            <div class="small"> Las mesas abiertas son: ( <label *ngFor="let mesa of mesas, let i = index"> {{mesa.numero_mesa}} | </label> ) </div>
-            <p class = "error" *ngIf="mesaform.controls['fecha1Mesa'].errors && mesaform.controls['fecha1Mesa'].touched"> Este campo es obligatorio por favor complete la fecha </p>
-            
+            <div class="small"> Las mesas abiertas son: ( <label *ngFor="let mesa of mesas, let i = index"> {{mesa.numero_mesa}} | </label> ) </div>            
             <p> <label> Productos </label> </p>
             <select formControlName = "productoId" class = "small container-fluid" >
                     <option *ngFor = "let producto of productos" value={{producto.id}} placeholder="Seleccione un producto"> 

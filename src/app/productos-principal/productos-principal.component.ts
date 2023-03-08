@@ -23,9 +23,9 @@ export class ProductosPrincipalComponent implements OnInit {
     this.productos = []; //estoy inicializando la lista a vacia
     
     this.agregarProducto = this.fb.group({
-      numeroProducto: '',
-      nombre: '',
-      precio: '',
+      numeroProducto: new FormControl('', [Validators.required]),
+      nombre: new FormControl('', [Validators.required]),
+      precio: new FormControl('', [Validators.required]),
     });
     this.verListaProductos = false;
   }
@@ -41,7 +41,6 @@ export class ProductosPrincipalComponent implements OnInit {
     this.productoService.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
-    console.log("Objeto traido del backeEnd: ",this.productos);
   }
 
 
@@ -57,10 +56,9 @@ export class ProductosPrincipalComponent implements OnInit {
 
       this.productos.push(this.agregarProducto.value);
       this.agregarProducto = this.fb.group({
-        numeroProducto: '',
-        nombre: '',
-        precio: '',
+        numeroProducto: new FormControl('', [Validators.required]),
+        nombre: new FormControl('', [Validators.required]),
+        precio: new FormControl('', [Validators.required]),
       });
-
     }
 }

@@ -146,6 +146,8 @@ eliminarProductoDeLista($event: any){
     * Envia esta mesa al servidor y limpia los formularios.
     * Una vez que envio la mesa al servidor necesito actualizar la lista de mesas "this.mesas" para traer el id de la mesa
     * Por ultimo limpio el formulario "abrirMesaForm"
+    * No recibe parametros
+    * No retorna ningun tipo
   */
   abrirNuevaMesa(){
     this.mesa1 = new Mesa();
@@ -171,7 +173,6 @@ eliminarProductoDeLista($event: any){
     this.mesa1 = new Mesa();
     this.mesaform =  this.fb.group({
       numeroMesa: new FormControl('', [Validators.required]),
-      fecha1Mesa: new FormControl('', [Validators.required]),
       productoId: new FormControl(),
       detalleMesa: new FormControl()
     });
@@ -243,6 +244,8 @@ eliminarProductoDeLista($event: any){
     });
     this.lista = [];
     this.mesa1 = new Mesa();
+    this.verForm2 = !this.verForm2;
+    this.verOcultar2 = "Ver";
   }
 
 
@@ -359,7 +362,7 @@ eliminarProductoDeLista($event: any){
     this.verUnaMesaBool = !this.verUnaMesaBool;
     this.mesa1 = new Mesa();
     this.verForm3 = !this.verForm3;
-    this.verOcultar = "Ver";
+    this.verOcultar3 = "Ver";
   }
 
 
