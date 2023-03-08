@@ -3,13 +3,14 @@ import { Producto } from "./Producto";
 
 export class Mesa{
 
+    id!: number;
     numero_mesa!: number;
     estado!: boolean;
     fecha!: Date;
     precio_temporal!: number;
     precio_total!: number;
-    forma_pago!: string;
-    detalle!: string;
+    forma_pago!: String;
+    detalle!: String;
 
     listaProductos!: Producto[];
     listaProductosCobrados!: Producto[];

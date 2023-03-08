@@ -2,13 +2,13 @@
 <div class="container-fluid">
     <nav>
         <p>
-            <a href="#ir_verMesas"><input  class = "boton1 resaltador" type = "button" value = "VerMesas"> </a>
+            <!--<a href="#ir_verMesas"><input  class = "boton1 resaltador" type = "button" value = "VerMesas"> </a> -->
             <a href="#ir_agregarMesa"><input  class = "boton1 resaltador" type = "button" value = "AgregarMesa"> </a>
             <a href="#Ver_cobrar"><input  class = "boton1 resaltador" type = "button" value = "Ver - Cobrar"></a>
             <a href="#ir_agregarProducto"> <input class = "boton1 resaltador" type = "button" value = "agregarProducto"> </a>
             <a href="#ir_modificarMesa"><input  class = "boton1 resaltador" type = "button" value = "modificarMesa"></a>
         </p>
-    </nav>    
+    </nav>
 </div>
 
 
@@ -138,7 +138,7 @@
 
 
 
-<div class = "recuadro_principal container" id = "ir_agregarMesa">
+<div class = "recuadro_principal container" id = "ir_agregarProducto">
     <h1>Agregar productos a una mesa </h1>
     <p> <button (click) = "verOcutarFormulario2()"  class="btn btn-dark"> {{verOcultar}} </button> </p>
     <div *ngIf="verOcultar == 'Ocultar' ">
@@ -263,7 +263,8 @@
             </div>
             <div class="recuadro_secundario small">
                 <p> Lista de Productos Cobrados: </p>
-                <ul *ngFor = "let producto of mesas[numero].listaProductosCobrados">
+                <ul *ngFor = "let producto of mesas[numero].listaProductosCobrados"> 
+<!--                <ul *ngFor = "let producto of lista"> -->
                     <button value="{{producto.id}}" (click)="deshacerCambioCobrarProducto($event)" class="btn btn-dark btn-sm"> Deshacer cambio </button> 
                     Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}
                 </ul>

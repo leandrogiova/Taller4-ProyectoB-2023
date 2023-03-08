@@ -118,6 +118,7 @@ export class MesasPrincipalComponent implements OnInit {
       this.mesaService.getAllMesasAbiertas().subscribe(mesas => {
         this.mesas = mesas;
       });
+      console.log("this.mesas: \n\n", this.mesas)
     }
 
 
@@ -127,7 +128,7 @@ export class MesasPrincipalComponent implements OnInit {
 
   /*
     * VerOcultarFormulario muestra u oculta el furmulario para abrir una nueva mesa
-    * VerOcultarFormulario cambia el valor de la variable booleana verForm para mostrar/ocultar el formalario
+    * VerOcultarFormulario cambia el valor de la variable booleana verForm para mostrar/ocultar el formulario
     * No recibe parametros
     * No retorna ningun tipo
   */
@@ -260,6 +261,11 @@ eliminarProductoDeLista($event: any){
 
 
 
+
+
+
+
+
   /*
     * FUNCION actualizarMesa
     * Actualiza una mesa con mas productos 
@@ -275,19 +281,36 @@ eliminarProductoDeLista($event: any){
 
 
 
+
+
+
+
+
   verOcutarFormulario3(){
-    this.vermesass();
-    
+
     if(this.verForm3) {
       this.verForm3 = false;
       this.verOcultar = "Ver";
+
     }
     else {
       this.verForm3 = true;
       this.verOcultar = "Ocultar";
+      this.vermesass();
     }
 
   }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -343,7 +366,7 @@ eliminarProductoDeLista($event: any){
     this.mesaService.postActualizar(this.mesa1);
     this.mesas[this.numero] = this.mesa1;
   }
-  */
+*/
   cobrarProducto($event: any){
     for(let i: number = 0; i < this.mesas[this.numero].listaProductos.length; i++){
       if(this.mesas[this.numero].listaProductos[i].id == $event.target.value){
@@ -353,10 +376,9 @@ eliminarProductoDeLista($event: any){
         break;
       }
     }
-    console.log("1 -- actualizando la lista de productos y la listaProductosCobrados \nmesas[this.mesas]: ", this.mesas[this.numero]);
+    console.log("\n\n1---- Actulizacion de las lista de la mesa this.mesas[this.numero]: ", this.mesas[this.numero]);
     this.mesaService.postActualizar(this.mesas[this.numero]);
   }
-
 
 
 
@@ -369,9 +391,10 @@ eliminarProductoDeLista($event: any){
         break;
       }
     }
-    console.log("2 -- actualizando la lista de productos y la listaProductosCobrados \nmesas[this.mesas]: ", this.mesas[this.numero]);
+    console.log("\n\n2---- Actulizacion de las lista de la mesa this.mesas[this.numero]: ", this.mesas[this.numero]);
     this.mesaService.postActualizar(this.mesas[this.numero]);
   }
+
   /*
   * FUNCION deshacerCambioCobrarProducto
   * Elimina un producto a la lista de productos cobrados
@@ -397,6 +420,22 @@ eliminarProductoDeLista($event: any){
   */
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /*
   * FUNCION cerrarMesa
   * Envia una mesa al servidor para ser guardada en la base de datos.
@@ -410,8 +449,7 @@ eliminarProductoDeLista($event: any){
     this.mesa1.estado = false;
     this.mesa1.precio_temporal = 0;
     
-    this.mesa1.forma_pago = "Efectivo";
-    
+   
     this.mesa1.listaProductos = this.mesa1.listaProductos.concat(this.mesa1.listaProductosCobrados);
     this.mesa1.listaProductosCobrados = [];
     this.mesaService.postActualizar(this.mesa1);
