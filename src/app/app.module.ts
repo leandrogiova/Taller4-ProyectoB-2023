@@ -8,13 +8,17 @@ import { AppComponent } from './app.component';
 import { MesasPrincipalComponent } from './mesas-principal/mesas-principal.component';
 
 import { ProductosPrincipalComponent } from './productos-principal/productos-principal.component';
+import { VerListaProductosComponent } from './productos-principal/ver-lista-productos/ver-lista-productos.component';
+import { ModificarListaProductosComponent } from './productos-principal/modificar-lista-productos/modificar-lista-productos.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MesasPrincipalComponent,
-    ProductosPrincipalComponent
+    ProductosPrincipalComponent,
+    VerListaProductosComponent,
+    ModificarListaProductosComponent
   ],
   imports: [
     ReactiveFormsModule,

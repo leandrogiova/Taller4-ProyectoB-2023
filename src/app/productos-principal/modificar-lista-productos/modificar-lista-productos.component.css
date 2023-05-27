@@ -82,6 +82,7 @@ body {
   background-color:#1F2739;
 }
 
+
 h1 {
   font-size:3em; 
   font-weight: 300;
@@ -108,7 +109,7 @@ h2 a {
 }
 
 .blue { color: #185875; }
-.yellow { color: #FFF842; }
+.yellow { color: #763a05; }
 
 .container th h1 {
 	  font-weight: bold;
@@ -153,8 +154,12 @@ h2 a {
 .container th {
 	  background-color: #1F2739;
 }
+.container input {
+  background-color: #1F2739;
+}
 
 .container td:first-child { color: #FB667A; }
+.container input:first-child { color: #FB667A; }
 
 .container tr:hover {
    background-color: #464A52;
@@ -164,7 +169,7 @@ h2 a {
 }
 
 .container td:hover {
-  background-color: #FFF842;
+  background-color: #763a05;;
   color: #403E10;
   font-weight: bold;
   
@@ -176,6 +181,24 @@ h2 a {
 	  transition-property: all;
   transition-timing-function: line;
 }
+
+
+
+.container input:hover {
+  background-color: #763a05;;
+  color: #403E10;
+  font-weight: bold;
+  
+  box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+  transform: translate3d(6px, -6px, 0);
+  
+  transition-delay: 0s;
+	  transition-duration: 0.4s;
+	  transition-property: all;
+  transition-timing-function: line;
+}
+
+
 
 @media (max-width: 800px) {
 .container td:nth-child(4),

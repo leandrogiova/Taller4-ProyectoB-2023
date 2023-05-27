@@ -1,0 +1,29 @@
+<div class = "recuadro_principal container-fluid">
+    <h1>
+        Modificar lista de Productos 
+    </h1>
+    
+    <div class="container-fluid"> 
+                <h2>Se podran modificar los cambios. Recuerde guardar los cambios </h2>   
+                <table class="container">
+                    <thead>
+                        <tr>
+                            <th><h1>Numero De Producto </h1></th>
+                            <th><h1>Nombre</h1></th>
+                            <th><h1>Precio</h1></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+                            <td>  <input type="number"  value="{{producto.numeroProducto}}" (onChange) = "cambioDeValor()"> </td>
+                            <td>  <input type = "text" value= "{{producto.nombre}}">     </td>
+                            <td> $ <input  type = "number" value= "{{producto.precio}}" ></td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+</div>
+
+
+
+<button class="btn btn-danger" (click) = "viendoProductos()" > vienodProductos </button>

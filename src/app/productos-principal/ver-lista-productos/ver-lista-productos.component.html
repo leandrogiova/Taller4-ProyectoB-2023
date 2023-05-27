@@ -1,0 +1,25 @@
+<div class = "recuadro_principal container-fluid">
+    <h1>
+        Ver lista de Productos 
+    </h1>
+    
+    <div class="container-fluid"> 
+                <h2>Se podran modificar los cambios. Recuerde guardar los cambios </h2>   
+                <table class="container">
+                    <thead>
+                        <tr>
+                            <th><h1>Numero De Producto</h1></th>
+                            <th><h1>Nombre</h1></th>
+                            <th><h1>Precio</h1></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos">
+                            <td>{{producto.numeroProducto}}</td>
+                            <td>{{producto.nombre}}</td>
+                            <td> $ {{producto.precio}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+</div>
