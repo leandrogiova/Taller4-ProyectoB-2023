@@ -18,8 +18,7 @@ export class MesaService {
 
 
   public postNuevaMesa(mesa: Mesa): void{
-    console.log("Enviando al servidor...");
-    console.log("\nEnviando una nueva mesa: \n", mesa);
+    
     this.http.post('http://localhost:8080/mesasAbiertas/envio', mesa).subscribe();
   }
 

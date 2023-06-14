@@ -101,7 +101,7 @@
         <div class="recuadro_secundario" *ngIf="verUnaMesaBool" >
             <h6> Mesa numero: {{this.mesa1.numero_mesa}} </h6>
             <div class="recuadro_secundario small">
-                <p> Lista de Productos: </p>
+                <p> Lista de Productos Sin cobrar: </p>
                 <ul *ngFor = "let producto of mesa1.listaProductos">
                     <button value="{{producto.id}}" (click)="cobrarProducto($event)" class="btn btn-dark btn-sm"> CobrarProducto </button> 
                     Numero de producto: {{producto.numeroProducto}} | {{producto.nombre}} | ${{producto.precio}}

@@ -165,7 +165,7 @@ eliminarProductoDeLista($event: any){
     this.mesa1.listaProductos = this.lista;
     this.mesa1.listaProductosCobrados = [];
 
-    console.log("Enviando mesa1: ", this.mesa1);
+
     this.mesaService.postNuevaMesa(this.mesa1);
     this.mesas.push(this.mesa1);
 
@@ -296,7 +296,7 @@ eliminarProductoDeLista($event: any){
   }
 
   /*
-    * FUNCION cobrarProducto
+    * FUNCION cobrarProducto   this.mesaService.postNuevaMesa(this.mesa1);
     * Agrega un producto a la lista de productos cobrados
     * Reutiliza la variable "lista" y elimina ese productos de la lista de productos de la mesa
     * Recorre la lista de productos de la mesa seleccionada anteriormente para encontrar el producto específico
@@ -310,6 +310,9 @@ eliminarProductoDeLista($event: any){
         this.mesas[this.numero].precio_temporal = this.mesas[this.numero].precio_temporal + this.mesas[this.numero].listaProductos[i].precio;
         this.mesas[this.numero].listaProductosCobrados.push(this.mesas[this.numero].listaProductos[i]);
         this.mesas[this.numero].listaProductos.splice(i,1);
+
+        this.mesaService.postNuevaMesa(this.mesas[this.numero]);
+
         break;
       }
     }
@@ -331,6 +334,10 @@ eliminarProductoDeLista($event: any){
         this.mesas[this.numero].precio_temporal = this.mesas[this.numero].precio_temporal - this.mesas[this.numero].listaProductosCobrados[i].precio;
         this.mesa1.listaProductos.push(this.mesas[this.numero].listaProductosCobrados[i]);
         this.mesas[this.numero].listaProductosCobrados.splice(i,1);
+
+
+        this.mesaService.postNuevaMesa(this.mesas[this.numero]);
+
         break;
       }
     }
