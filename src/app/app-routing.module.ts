@@ -4,11 +4,13 @@ import { MesasPrincipalComponent } from './mesas-principal/mesas-principal.compo
 import { ProductosPrincipalComponent } from './productos-principal/productos-principal.component';
 import { VerListaProductosComponent } from './productos-principal/ver-lista-productos/ver-lista-productos.component';
 import { ModificarListaProductosComponent } from './productos-principal/modificar-lista-productos/modificar-lista-productos.component';
+import { ResumenesComponent } from './resumenes/resumenes.component';
 
 
 const routes: Routes = [
   {path: 'home', component: MesasPrincipalComponent},
   {path: 'productos', component: ProductosPrincipalComponent},
+  {path: 'resumenes', component: ResumenesComponent},
   {path: 'listaProductos', component: VerListaProductosComponent},
   {path: 'modificarListaProductos', component: ModificarListaProductosComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},  // cuando no se le especifica nada entra en home

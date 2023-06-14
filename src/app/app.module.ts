@@ -10,6 +10,7 @@ import { MesasPrincipalComponent } from './mesas-principal/mesas-principal.compo
 import { ProductosPrincipalComponent } from './productos-principal/productos-principal.component';
 import { VerListaProductosComponent } from './productos-principal/ver-lista-productos/ver-lista-productos.component';
 import { ModificarListaProductosComponent } from './productos-principal/modificar-lista-productos/modificar-lista-productos.component';
+import { ResumenesComponent } from './resumenes/resumenes.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ModificarListaProductosComponent } from './productos-principal/modifica
     MesasPrincipalComponent,
     ProductosPrincipalComponent,
     VerListaProductosComponent,
-    ModificarListaProductosComponent
+    ModificarListaProductosComponent,
+    ResumenesComponent
   ],
   imports: [
     ReactiveFormsModule,

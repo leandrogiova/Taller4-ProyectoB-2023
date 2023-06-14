@@ -1,14 +1,25 @@
+<div class="container-fluid">
+    <nav>
+        <p>
+            
+            <a routerLink="/listaProductos" target="_blank"> <input class = "boton1 resaltador" value = "Ver Lista de Productos">  </a>
+            <a href="#agregarunproductobasededatos"><input  class = "boton1 resaltador" type = "button" value = "Agregar una Producto"> </a>
+            <a routerLink="/modificarListaProductos" target="_blank"> <input class = "boton1 resaltador" value = "Modificar Lista de Productos">  </a>
+            
+        </p>
+    </nav>
+</div>
+
+
 <div class = "recuadro_principal container-fluid">
-    <h1>
-        Ver lista de Productos 
-    </h1>
+    <h1> Ver lista de Productos </h1>
     <a   class = "btn btn-dark" routerLink="/listaProductos" target="_blank" > Ver Lista Productos </a>
 </div>
 
 
 
 
-  <div class = "recuadro_principal container-fluid">
+  <div class = "recuadro_principal container-fluid" id="#agregarunproductobasededatos">
     <form [formGroup] = "agregarProducto" (submit) = "enviarProducto()">
        <h1> Agregar Producto A la Bases de Datos</h1>    
        <span class="badge bg-warning text-dark" *ngIf="agregarProducto.invalid"> Todos los campos son obligatorios </span>
@@ -20,7 +31,7 @@
     </form>
 </div>
 
-<div class = "recuadro_principal container-fluid">
+<div class = "recuadro_principal container-fluid" id = "ir_ModificarUnProducto">
     <h1>
         Modificar lista de Productos 
     </h1>
