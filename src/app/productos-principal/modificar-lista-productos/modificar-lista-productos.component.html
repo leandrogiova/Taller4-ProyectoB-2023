@@ -15,9 +15,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let producto of productos">
-                            <td>  <input type="number"  value="{{producto.numeroProducto}}" (onChange) = "cambioDeValor()"> </td>
-                            <td>  <input type = "text" value= "{{producto.nombre}}">     </td>
-                            <td> $ <input  type = "number" value= "{{producto.precio}}" ></td>
+                            <td>  <input type="number"  value="{{producto.numeroProducto}}" (change) = "cambioDeValor($event,producto, 0)"> </td>
+                            <td>  <input type = "text" value= "{{producto.nombre}}" (change) = "cambioDeValor($event,producto, 1)">  </td>
+                            <td> $ <input  type = "number" value= "{{producto.precio}}" (change) = "cambioDeValor($event,producto, 2)">  </td>
                         </tr>
                     </tbody>
                 </table>
