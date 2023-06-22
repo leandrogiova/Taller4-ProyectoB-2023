@@ -9,8 +9,10 @@ import { ProductoService } from 'src/app/services/productos-service.service';
 })
 export class ModificarListaProductosComponent {
 
+
   EliminarProdBool: boolean = false;
   productos: Producto[];
+
 
   constructor(private productoService: ProductoService) { 
     this.productos = [];
@@ -22,7 +24,6 @@ export class ModificarListaProductosComponent {
     });
 
 
-    //this.productoService.$modalEliminarProudcto.subscribe((valor)=> {this.EliminarProdBool = valor; })
 
 
   }
@@ -31,15 +32,17 @@ export class ModificarListaProductosComponent {
     this.productoService.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
+    console.log("\n\n\nLISTA:", this.productos);
   }
 
 
 
 /*  * Funcion cambioDeValor
-    * Cambia el valor del campo correspondiente
+    * Modifica el numero de Producto, nombre o precio de un Producto en especifico.
+    * Cambia el valor del campo correspondiente.
     * Si se quiere cambiar el nombre de un producto en especifico se puede cambiar!
-    * Los campos que se permiten cambiar son "numberoProducto", "nombre", "precio"
-    * La funcion recibe como parametros "$event" que es el valor del campo correspondiente a cambiar
+    * Los campos que se permiten cambiar son "numberoProducto", "nombre", "precio".
+    * La funcion recibe como parametros "$event" que es el "valor del campo"(es el dato nuevo) correspondiente a cambiar.
     *                                   "producto" para el producto que quiere modificar, para esto se hace un bucle recorriendo la lista de productos
     *                                              para encontrar al producto que se le quiere cambiar y una vez encontrardo el producto con el parametro "number"
     *                                              se va a cambiar el campo correspondiente.
@@ -60,26 +63,5 @@ export class ModificarListaProductosComponent {
         }
     }
   }
-
-  eliminarProducto($event: any){
-    console.log("producto === ", $event.target.value);
-  }
-
-
-  openModalEliminarProducto(){
-    this.EliminarProdBool = true;
-  }
-
-
-
-
-
-  viendoProductos(){
-    console.log("This.productos[0].nombre = " + this.productos[0].nombre );
-    console.log("This.productos[0].precio = " + this.productos[0].precio );
-    console.log("This.productos[1].nombre = " + this.productos[1].nombre );
-    console.log("This.productos[1].precio = " + this.productos[1].precio );
-  }
-
 
 }

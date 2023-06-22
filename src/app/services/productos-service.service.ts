@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from '../models/Producto';
@@ -17,8 +17,6 @@ export class ProductoService {
 
 
   public postProducto(producto: Producto): void{
-    console.log("Enviando al servidor...");
-    console.log("\nEnviando el objeto: \n", producto);
     this.http.post('http://localhost:8080/productos/enviar', producto).subscribe();
   }
 

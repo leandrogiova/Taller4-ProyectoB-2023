@@ -3,11 +3,11 @@
     <div class="modalGeneral" #salirDelModal>
         <div class="ModalContent">
             <div class="Modalcheader">
-                <h4 class="ModalTitle"> Desea confirmar eliminar el producto... </h4>
+                <h4 class="ModalTitle"> Desea confirmar eliminar el producto "{{producto1.nombre}}"</h4>
                 <ng-template [ngTemplateOutlet]="closeIcon"  ></ng-template>
             </div>
             <div class="ModalContainer">
-                <button class="espaciobtn btn btn-warning"> Si, eliminar el prouducto </button>
+                <button class="espaciobtn btn btn-warning" (click)="confirmacionEliminarProducto()"> Si, eliminar el prouducto </button>
                 <button class="espaciobtn btn btn-primary" (click)="hideModal()"> No, conservar el producto </button>
             </div>
         </div>
