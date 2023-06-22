@@ -102,6 +102,7 @@ export class MesasPrincipalComponent implements OnInit {
     * No retorna ningun tipo
   */
   verOcutarFormulario(){
+    this.vermesass();
     if(this.verForm) {
       this.verForm = false;
       this.verOcultar = "Ver";
@@ -165,7 +166,8 @@ eliminarProductoDeLista($event: any){
     this.mesa1.listaProductos = this.lista;
     this.mesa1.listaProductosCobrados = [];
 
-
+    
+    console.log("this.mesa == ", this.mesa1);
     this.mesaService.postNuevaMesa(this.mesa1);
     this.mesas.push(this.mesa1);
 
@@ -178,6 +180,9 @@ eliminarProductoDeLista($event: any){
     });
     this.verForm = !this.verForm;
     this.verOcultar = "Ver";
+
+
+
   }
   
 

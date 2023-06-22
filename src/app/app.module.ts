@@ -12,6 +12,8 @@ import { VerListaProductosComponent } from './productos-principal/ver-lista-prod
 import { ModificarListaProductosComponent } from './productos-principal/modificar-lista-productos/modificar-lista-productos.component';
 import { ResumenesComponent } from './resumenes/resumenes.component';
 
+import { ModalEliminarProductoComponent } from './productos-principal/modificar-lista-productos/modal-eliminar-producto/modal-eliminar-producto.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ResumenesComponent } from './resumenes/resumenes.component';
     ProductosPrincipalComponent,
     VerListaProductosComponent,
     ModificarListaProductosComponent,
-    ResumenesComponent
+    ResumenesComponent,
+    ModalEliminarProductoComponent
   ],
   imports: [
     ReactiveFormsModule,

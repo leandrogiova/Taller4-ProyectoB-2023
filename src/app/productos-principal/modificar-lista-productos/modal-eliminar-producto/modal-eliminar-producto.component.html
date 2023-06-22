@@ -1,0 +1,51 @@
+<ng-container *ngIf="show">
+
+    <div class="modalGeneral" #salirDelModal>
+        <div class="ModalContent">
+            <div class="Modalcheader">
+                <h4 class="ModalTitle"> Desea confirmar eliminar el producto... </h4>
+                <ng-template [ngTemplateOutlet]="closeIcon"  ></ng-template>
+            </div>
+            <div class="ModalContainer">
+                <button class="espaciobtn btn btn-warning"> Si, eliminar el prouducto </button>
+                <button class="espaciobtn btn btn-primary" (click)="hideModal()"> No, conservar el producto </button>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+
+
+<!-- Utilizo este "ng-template para que sea mas limpio el codigo arriba!!"
+    Arriba utilizo este "#cliseIcon" y NO utilizo todo el codigo svg
+    Atraves de este identificador "closeIcon" transporto todo el codigo a donde lo necesite
+-->
+<ng-template #closeIcon>
+    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="60px" height="60px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" (click)="show = false;">
+        <defs>
+            <style type="text/css">
+                .fil0 {fill:#BA2B2B}
+                .fil1 {fill:#FF4141}
+                .fil2 {fill:white}
+            </style>
+        </defs>
+            <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"/>
+            <g id="_328460368">
+                <g>
+                    <path class="fil0" d="M413 512l-46 0c-4,0 -7,-4 -7,-8 0,-4 3,-7 7,-7l46 0c46,0 84,-38 84,-85l0 -54c0,-4 3,-7 8,-7 4,0 7,3 7,7l0 54c0,55 -45,100 -99,100zm-269 0l-45 0c-55,0 -99,-45 -99,-99l0 -46c0,-4 3,-8 7,-8 5,0 8,4 8,8l0 45c0,47 38,85 84,85l46 0c4,0 7,3 7,7 0,4 -4,8 -8,8zm-137 -360c-4,0 -7,-4 -7,-8l0 -45c0,-55 44,-99 99,-99l45 0c4,0 8,4 8,7 0,4 -4,8 -8,8l-45 0c-47,0 -84,38 -84,84l0 45c0,4 -3,8 -8,8zm497 -9c-4,0 -7,-3 -7,-8l0 -37c0,-46 -38,-83 -85,-83l-45 0c-4,0 -7,-4 -7,-8 0,-4 3,-7 7,-7l46 0c54,0 99,44 99,99l0 37c0,4 -4,7 -8,7z"/>
+                </g>
+                    <path class="fil1" d="M413 438l-314 0c-14,0 -25,-12 -25,-25l0 -314c0,-14 12,-25 25,-25l314 0c14,0 25,11 25,25l0 314c0,14 -11,25 -25,25z"/>
+                    <g>
+                        <g>
+                            <path class="fil2" d="M163 356c-1,0 -3,-1 -5,-2 -3,-3 -3,-8 0,-11l185 -185c3,-3 8,-3 11,0 3,3 3,7 0,10l-185 186c-2,1 -4,2 -6,2z"/>
+                        </g>
+                        <g>
+                            <path class="fil2" d="M348 356c-1,0 -3,-1 -5,-2l-185 -186c-3,-3 -3,-7 0,-10 3,-3 8,-3 11,0l185 185c3,3 3,8 0,11 -2,1 -4,2 -6,2z"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg>
+</ng-template>

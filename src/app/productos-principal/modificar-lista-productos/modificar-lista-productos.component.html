@@ -2,15 +2,21 @@
     <h1>
         Modificar lista de Productos 
     </h1>
+        
+    https://www.youtube.com/watch?v=_bTYBCpVgmU&ab_channel=OscarLeuro
+    https://www.youtube.com/watch?v=kwGCvabdt9Y&ab_channel=Designicode
     
+
     <div class="container-fluid"> 
-                <h2>Se podran modificar los cambios. Recuerde guardar los cambios </h2>   
+                <h2>Se podran modificar los campos.</h2>
+                <h2>Cada cambio que se haga se impactara inmediatamente! </h2>   
                 <table class="container">
                     <thead>
                         <tr>
                             <th><h1>Numero De Producto </h1></th>
                             <th><h1>Nombre</h1></th>
                             <th><h1>Precio</h1></th>
+                            <th><h1></h1></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -18,12 +24,15 @@
                             <td>  <input type="number"  value="{{producto.numeroProducto}}" (change) = "cambioDeValor($event,producto, 0)"> </td>
                             <td>  <input type = "text" value= "{{producto.nombre}}" (change) = "cambioDeValor($event,producto, 1)">  </td>
                             <td> $ <input  type = "number" value= "{{producto.precio}}" (change) = "cambioDeValor($event,producto, 2)">  </td>
+
+<!--                             <button class="btn btn-danger" value = "{{producto.id}}"(click) = "eliminarProducto($event)">  Eliminar producto </button> -->
+                            <button class="btn btn-danger" value="{{producto}}" (click)="modalEliminarProducto.showModal(producto)"> ELiminar producto </button>
+                            <app-modal-eliminar-producto #modalEliminarProducto >
+                                
+                            </app-modal-eliminar-producto>
                         </tr>
                     </tbody>
                 </table>
     </div>
 </div>
 
-
-
-<button class="btn btn-danger" (click) = "viendoProductos()" > vienodProductos </button>

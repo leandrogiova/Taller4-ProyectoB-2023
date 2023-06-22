@@ -9,6 +9,8 @@ import { Producto } from '../models/Producto';
 })
 export class ProductoService {
 
+
+
   constructor(private http: HttpClient) { 
 
   }
@@ -24,6 +26,10 @@ export class ProductoService {
 
   public getAllProductos(): Observable<Producto[]> {
     return  this.http.get<Producto[]>('http://localhost:8080/productos/lista');
+  }
+
+  public eliminarProducto(producto: Producto): void{
+    this.http.post('http://localhost:8080/productos/eliminar', producto).subscribe();
   }
 
 

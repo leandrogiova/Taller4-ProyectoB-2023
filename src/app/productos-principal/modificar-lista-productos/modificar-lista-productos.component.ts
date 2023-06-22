@@ -9,6 +9,7 @@ import { ProductoService } from 'src/app/services/productos-service.service';
 })
 export class ModificarListaProductosComponent {
 
+  EliminarProdBool: boolean = false;
   productos: Producto[];
 
   constructor(private productoService: ProductoService) { 
@@ -19,6 +20,11 @@ export class ModificarListaProductosComponent {
     this.productoService.getAllProductos().subscribe(productos => {
       this.productos = productos;
     });
+
+
+    //this.productoService.$modalEliminarProudcto.subscribe((valor)=> {this.EliminarProdBool = valor; })
+
+
   }
 
   VerListaProducto(){
@@ -44,8 +50,6 @@ export class ModificarListaProductosComponent {
     * No retorna parametros
 */
   cambioDeValor($event: any,producto: Producto, number: number){
-    console.log("cambiando a .... ", $event.target.value);
-
     for(let e=0; e < this.productos.length; e++) {
       if(this.productos[e].id == producto.id) {
 
@@ -54,15 +58,21 @@ export class ModificarListaProductosComponent {
           if (number == 2) { this.productos[e].precio =  $event.target.value; this.productoService.postProducto(this.productos[e]); }
         
         }
-
-
     }
-
-
-
-    console.log("\n\n\nlista de productos: ", this.productos);
-
   }
+
+  eliminarProducto($event: any){
+    console.log("producto === ", $event.target.value);
+  }
+
+
+  openModalEliminarProducto(){
+    this.EliminarProdBool = true;
+  }
+
+
+
+
 
   viendoProductos(){
     console.log("This.productos[0].nombre = " + this.productos[0].nombre );
