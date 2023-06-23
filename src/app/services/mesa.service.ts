@@ -26,6 +26,12 @@ export class MesaService {
     this.http.post('http://localhost:8080/mesasAbiertas/updateMesa', mesa).subscribe();
   }
 
+
+  public pedirResumen(fechas: Date[]): any {
+    //this.http.post('http://localhost:8080/mesasAbiertas/updateMesa', mesa).subscribe();
+    this.http.post('http://localhost:8080/mesasAbiertas/Resumenes', fechas).subscribe();
+  }
+
 }
 
 
